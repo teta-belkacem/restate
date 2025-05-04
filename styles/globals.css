@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap');
+@import './tailwind.css';
+@import "tailwindcss";
+@plugin "daisyui";
+
+html {
+  direction: rtl;
+  font-family: 'Noto Sans Arabic', sans-serif;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #000000;
+}
