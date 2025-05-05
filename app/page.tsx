@@ -1,8 +1,9 @@
 import { createClient } from "@/utils/supabase/client";
+import RootLayout from "./layout";
 
 export default async function Home() {
   const supabase = createClient();
-  const { data, error} = await supabase
+  const { data, error } = await supabase
     .from("states")
     .select("*");
   
@@ -12,7 +13,7 @@ export default async function Home() {
   }
 
   return (
-    <div>
+    <RootLayout>
       <h1>Supabase Data</h1>
       {data && data.length > 0 ? (
         <ul>
@@ -25,6 +26,6 @@ export default async function Home() {
       ) : (
         <p>No data found</p>
       )}
-    </div>
+    </RootLayout>
   );
 }
