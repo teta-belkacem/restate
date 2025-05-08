@@ -14,13 +14,13 @@ export const payment_types = [
   "تقسيط",
 ] as const;
 
-export const documents_types = [
-  "عقد ملكية",
-  "عقد إيجار",
-  "رخصة بناء",
-  "شهادة إتمام بناء",
-  "شهادة تصرف",
-] as const;
+// export const documents_types = [
+//   "عقد ملكية",
+//   "عقد إيجار",
+//   "رخصة بناء",
+//   "شهادة إتمام بناء",
+//   "شهادة تصرف",
+// ] as const;
 
 export const listing_status = ["قيد الإنشاء", "قيد المراجعة", "مقبول", "مرفوض" ] as const; 
 
