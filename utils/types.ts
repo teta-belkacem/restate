@@ -64,6 +64,8 @@ export interface Listing {
   id: string;
   /** Foreign key referencing `users.id` */
   user_id: string;
+  /** Title of the listing */
+  title: string;
   /** Type of property */
   property_type: number;
   /** Property address */
