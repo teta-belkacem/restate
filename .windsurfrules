@@ -3,3 +3,4 @@
 - when making UI always adhere to a simple minimal light theme design and stay consistent with it throughout the project.
 - when creating new code always scan the project folder structure and make sure everything goes to its proper place.
 - keep in mind that this website is in Arabic with RTL layout.
+- make reusable components whenever possible.
