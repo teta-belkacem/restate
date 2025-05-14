@@ -18,6 +18,20 @@ export const paymentTypes = [
   { id: 2, name: "تقسيط" },
 ] as const;
 
-export const listingStatus = ["قيد الإنشاء", "قيد المراجعة", "مقبول", "مرفوض" ] as const; 
+export const specifications = {
+  "gas" : "الغاز",
+  "electricity" : "الكهرباء",
+  "water" : "الماء",
+}
 
-export const reviewStatus = [ "مقبول", "مرفوض" ] as const; 
+export const listingStatus = [
+  { id: 0, name: "قيد الإنشاء"}, 
+  { id: 1, name: "قيد المراجعة"}, 
+  { id: 2, name: "مقبول"}, 
+  { id: 3, name: "مرفوض"}, 
+] as const; 
+
+export const reviewStatus = [
+  { id: 0, name: "مقبول"}, 
+  { id: 1, name: "مرفوض"}, 
+] as const; 
