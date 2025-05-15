@@ -32,6 +32,6 @@ export const listingStatus = [
 ] as const; 
 
 export const reviewStatus = [
-  { id: 0, name: "مقبول"}, 
-  { id: 1, name: "مرفوض"}, 
+  { id: 0, name: "مرفوض"}, 
+  { id: 1, name: "مقبول"}, 
 ] as const; 

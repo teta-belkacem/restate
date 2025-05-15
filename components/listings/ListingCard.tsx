@@ -9,7 +9,6 @@ interface ListingCardProps {
     states?: State;
     municipalities?: Municipality;
   };
-  highlightBids?: boolean;
   className?: string;
 }
 
@@ -19,7 +18,6 @@ interface ListingCardProps {
  */
 const ListingCard: React.FC<ListingCardProps> = ({ 
   listing, 
-  highlightBids = false,
   className = ''
 }) => {
   // Get the primary image or placeholder
@@ -74,7 +72,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
         </Link>
 
         {/* Price section */}
-        {(listing.seller_price || highlightBids) && (
+        {(listing.seller_price || listing.highest_bidding_price) && (
           <div className="mb-2">
             {listing.seller_price ? (
               <span className="text-blue-600 font-bold text-lg">
@@ -84,11 +82,13 @@ const ListingCard: React.FC<ListingCardProps> = ({
                 )}
               </span>
             ) : (
-              highlightBids && (
+              listing.highest_bidding_price ? (
                 <span className="text-green-600 font-bold text-lg">
                   {/* Placeholder for highest bid - replace with actual bid logic */}
-                  أعلى عرض: {(0).toLocaleString('ar-DZ')} دج
+                  أعلى عرض: {listing.highest_bidding_price.toLocaleString('ar-DZ')} دج
                 </span>
+              ) : (
+                <span className="text-orange-600">السعر غير محدد</span>
               )
             )}
           </div>

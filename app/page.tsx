@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default async function Home() {
+export default function Home() {
   const router = useRouter();
   const [isCreating, setIsCreating] = useState(false);
 
@@ -36,7 +36,27 @@ export default async function Home() {
     <div className="container mx-auto p-4" dir="rtl">
       <div className="flex flex-col gap-6">
         <h1 className="text-2xl font-bold">الصفحة الرئيسية</h1>
-        
+
+        {/* Quick Logout Button */}
+        <div className="card bg-base-100 shadow-md p-6 mb-4">
+          <h2 className="text-xl font-bold mb-2">تسجيل الخروج</h2>
+          <p className="mb-4">يمكنك تسجيل الخروج من حسابك</p>
+          <button
+            onClick={async () => {
+              try {
+                await fetch("/api/auth/logout", { method: "POST" });
+                router.push("/auth/login");
+              } catch (error) {
+                console.error("Error during logout:", error);
+              }
+            }}
+            className="btn btn-error w-full md:w-auto"
+          >
+            تسجيل الخروج
+          </button>
+        </div>
+
+
         {/* Create Listing Button */}
         <div className="card bg-base-100 shadow-md p-6">
           <h2 className="text-xl font-bold mb-4">إدارة العقارات</h2>

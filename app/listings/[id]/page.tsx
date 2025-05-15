@@ -237,10 +237,12 @@ export default function ListingDetail() {
         {/* Property specifications */}
         <ContentCard title="المواصفات">
           <ul className="space-y-3">
+            {listing.total_area !== null && (
             <li className="flex justify-between">
               <span className="text-gray-600">المساحة الإجمالية:</span>
               <span className="font-semibold">{listing.total_area} م²</span>
             </li>
+            )}
             {listing.rooms !== null && (
               <li className="flex justify-between">
                 <span className="text-gray-600">عدد الغرف:</span>
