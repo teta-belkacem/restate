@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import LocationSelectorExample from "@/components/search/LocationSelectorExample";
 
-export default function Home() {
+export default async function Home() {
   const router = useRouter();
   const [isCreating, setIsCreating] = useState(false);
 
@@ -57,9 +56,6 @@ export default function Home() {
             )}
           </button>
         </div>
-
-        <LocationSelectorExample />
-        
       </div>
     </div>
   );

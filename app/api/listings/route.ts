@@ -22,6 +22,7 @@ export async function GET(req: NextRequest) {
     const minPrice = url.searchParams.get('min_price');
     const maxPrice = url.searchParams.get('max_price');
     const minRooms = url.searchParams.get('min_rooms');
+    const minStories = url.searchParams.get('min_stories');
     const minArea = url.searchParams.get('min_area');
     const maxArea = url.searchParams.get('max_area');
     const query = url.searchParams.get('query')?.trim();
@@ -68,6 +69,10 @@ export async function GET(req: NextRequest) {
     
     if (minRooms) {
       listingQuery = listingQuery.gte('rooms', parseInt(minRooms));
+    }
+    
+    if (minStories) {
+      listingQuery = listingQuery.gte('stories', parseInt(minStories));
     }
     
     if (minArea) {

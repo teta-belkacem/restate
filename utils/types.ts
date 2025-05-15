@@ -91,7 +91,7 @@ export interface Listing {
   /** Description of the neighborhood, nullable */
   neighborhood_description: string | null;
   /** Type of documents provided */
-  documents_type: number | null;
+  documents_type: string | null;
   /** Number of views */
   view_count: number | null;
   /** Number of rooms, nullable */
