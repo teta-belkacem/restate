@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import NotificationDropdown from "@/components/common/NotificationDropdown";
 
 export default function Home() {
   const router = useRouter();
@@ -36,6 +37,8 @@ export default function Home() {
     <div className="container mx-auto p-4" dir="rtl">
       <div className="flex flex-col gap-6">
         <h1 className="text-2xl font-bold">الصفحة الرئيسية</h1>
+
+        <NotificationDropdown />
 
         {/* Quick Logout Button */}
         <div className="card bg-base-100 shadow-md p-6 mb-4">
