@@ -2,7 +2,7 @@
 @import './tailwind.css';
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: corporate --default;
+  themes: lofi --default;
 }
 
 html {

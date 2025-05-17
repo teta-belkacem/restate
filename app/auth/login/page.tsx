@@ -61,8 +61,8 @@ export default function LoginPage() {
       }
 
       // Redirect to home page on successful login
-      router.push('/')
-      router.refresh()
+      router.push('/');
+      router.refresh();
     } catch (err: any) {
       setError(err.message)
       setLoading(false)
