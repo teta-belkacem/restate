@@ -45,12 +45,12 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-base-100">
       {/* Hero Section */}
-      <section className="hero min-h-[600px] bg-gradient-to-l from-blue-50 to-blue-100 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-repeat pattern-dots"></div>
+      <section className="hero min-h-[calc(100vh-66px)] bg-[url('/hero.jpg')] bg-cover bg-center grayscale-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-primary/50"></div>
         <div className="hero-content text-center py-16 w-full max-w-7xl mx-auto px-4">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">إبحث عن منزل أحلامك</h1>
-            <p className="text-lg mb-8 text-gray-700">المنصة الموحدة لجميع العروض العقارية في الجزائر</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white [text-shadow:_0px_0px_8px_rgb(0_0_0_/_100%)]">إبحث عن منزل أحلامك</h1>
+            <p className="text-lg mb-8 text-gray-100 [text-shadow:_0px_0px_8px_rgb(0_0_0_/_100%)]">المنصة الموحدة لجميع العروض العقارية في الجزائر</p>
             
             {/* Search Box */}
             <div className="bg-white p-6 rounded-2xl shadow-lg mb-6">
