@@ -112,8 +112,8 @@ export default function ListingReviewModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-black bg-opacity-50">
-      <div className="relative w-full max-w-6xl p-4 mx-auto bg-white rounded-lg shadow-lg overflow-y-auto h-[90vh]" dir="rtl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-black/50" onClick={onClose}>
+      <div className="relative w-full max-w-6xl p-4 mx-auto bg-white rounded-lg shadow-lg overflow-y-auto h-[90vh]" dir="rtl" onClick={(e) => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-4 border-b pb-4">
           <h3 className="text-2xl font-bold text-primary">{listing.title || 'بدون عنوان'}</h3>
           <button
@@ -290,8 +290,8 @@ export default function ListingReviewModal({
 
         {/* Reject Modal */}
         {isRejectModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-black bg-opacity-50">
-            <div className="relative w-full max-w-md p-6 mx-auto bg-white rounded-lg shadow-lg" dir="rtl">
+          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-black/50" onClick={() => setIsRejectModalOpen(false)}>
+            <div className="relative w-full max-w-md p-6 mx-auto bg-white rounded-lg shadow-lg" dir="rtl" onClick={(e) => e.stopPropagation()}>
               <h3 className="text-xl font-bold mb-4 text-error">رفض الإعلان</h3>
               <p className="mb-4">يرجى تقديم سبب الرفض:</p>
               
