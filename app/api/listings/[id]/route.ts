@@ -6,9 +6,12 @@ import { protectRoute } from '@/utils/auth/protect-route';
  * GET handler for fetching a single listing by ID
  * Public route - doesn't require authentication
  */
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     
     // Initialize Supabase client
     const supabase = await createClient();
