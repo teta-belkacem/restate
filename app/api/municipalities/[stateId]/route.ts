@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { stateId: string } }
-) {
+export async function GET(request: Request) {
   try {
-    const { stateId } = params;
+    // Extract stateId from the URL path
+    const url = new URL(request.url);
+    const pathname = url.pathname;
+    const stateId = pathname.split('/').pop();
     
     if (!stateId || isNaN(parseInt(stateId))) {
       return NextResponse.json(

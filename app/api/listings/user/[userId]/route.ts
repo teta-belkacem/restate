@@ -5,9 +5,18 @@ import { createClient } from '@/utils/supabase/server';
  * GET handler for fetching listings by user ID
  * Public route - doesn't require authentication
  */
-export async function GET(req: NextRequest, { params }: { params: { userId: string } }) {
+export async function GET(req: NextRequest) {
   try {
-    const { userId } = params;
+    // Extract userId from the URL path
+    const pathname = req.nextUrl.pathname;
+    const userId = pathname.split('/').pop();
+    
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'Invalid user ID' },
+        { status: 400 }
+      );
+    }
     
     // Get query parameters for filtering
     const url = new URL(req.url);

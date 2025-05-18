@@ -1,10 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { NextResponse } from 'next/server'
 
-export async function POST(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function POST(request: Request) {
   try {
     const supabase = await createClient()
     
@@ -18,7 +15,17 @@ export async function POST(
       )
     }
     
-    const notificationId = params.id
+    // Extract notification ID from the URL path
+    const url = new URL(request.url)
+    const pathname = url.pathname
+    const notificationId = pathname.split('/')[3]
+    
+    if (!notificationId) {
+      return NextResponse.json(
+        { error: 'Invalid notification ID' },
+        { status: 400 }
+      )
+    }
     
     // First check if the notification belongs to the user
     const { data: notification, error: fetchError } = await supabase
