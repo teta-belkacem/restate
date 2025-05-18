@@ -129,6 +129,27 @@ export default function ListingReviewModal({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Images Gallery */}
           <div className="md:col-span-2 rounded-lg overflow-hidden">
+
+            {/* Video */}
+            {listing.video ? (
+              <div className="mt-4 p-2 border rounded-lg">
+                <h4 className="text-lg font-semibold mb-2">فيديو العقار</h4>
+                <video 
+                  src={listing.video} 
+                  controls 
+                  className="w-full rounded-lg" 
+                  style={{ maxHeight: '300px' }} 
+                />
+              </div>
+            ) : (
+              <div className='h-[200px] w-full flex items-center justify-center'>
+                <p className='text-center text-gray-500'>
+                  لا يوجد فيديو!
+                </p>
+              </div>
+            )}
+
+            {/* Images */}
             <div className="carousel w-full rounded-lg shadow-md">
               {listing.images && listing.images.length > 0 ? (
                 listing.images.map((image, index) => (
@@ -159,19 +180,6 @@ export default function ListingReviewModal({
                 </div>
               )}
             </div>
-
-            {/* Video */}
-            {listing.video && (
-              <div className="mt-4 p-2 border rounded-lg">
-                <h4 className="text-lg font-semibold mb-2">فيديو العقار</h4>
-                <video 
-                  src={listing.video} 
-                  controls 
-                  className="w-full rounded-lg" 
-                  style={{ maxHeight: '300px' }} 
-                />
-              </div>
-            )}
           </div>
 
           {/* Listing Details */}

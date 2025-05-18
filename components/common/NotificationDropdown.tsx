@@ -138,7 +138,7 @@ export default function NotificationDropdown() {
       
       <div 
         tabIndex={0} 
-        className="mt-3 z-[1] card card-compact dropdown-content w-80 bg-base-100 shadow-xl"
+        className="mt-3 z-[1] card card-compact dropdown-content w-80 bg-base-100 shadow-xl max-h-[90vh] overflow-hidden"
       >
         <div className="card-body">
           <h3 className="card-title text-right">الإشعارات</h3>
@@ -163,14 +163,14 @@ export default function NotificationDropdown() {
           ) : notifications.length === 0 ? (
             <div className="text-center p-4">لا توجد إشعارات</div>
           ) : (
-            <ul className="menu bg-base-100 w-full rounded-box p-0">
+            <ul className="menu bg-base-100 w-full rounded-box p-0 max-h-[50vh] overflow-y-auto">
               {notifications.map((notification) => (
                 <li key={notification.id}>
                   <button 
                     onClick={() => openNotificationDetails(notification)}
                     className={`flex flex-col items-start text-right py-3 ${!notification.is_read ? '' : 'opacity-75'}`}
                   >
-                    <span className="text-sm truncate w-full flex items-center gap-2">
+                    <span className="text-sm truncate w-full flex items-start gap-2">
                       {notification.message}
                     </span>
                     <small className="text-xs opacity-70">
