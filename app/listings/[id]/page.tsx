@@ -7,7 +7,8 @@ import { createClient } from '@/utils/supabase/client';
 import ContentCard from '@/components/common/ContentCard';
 import { Listing, State, Municipality } from '@/utils/types';
 import { listingStatus, propertyTypes, operationTypes, paymentTypes, specifications } from '@/utils/constants';
-import  ImageCarousel  from '@/components/listings/ImageCarousel';
+import ImageCarousel from '@/components/listings/ImageCarousel';
+import { toast } from 'react-hot-toast';
 
 /**
  * Listing details page component
@@ -81,6 +82,30 @@ export default function ListingDetail() {
   const isOwner = currentUser === listing.user_id;
   const canEdit = isOwner && listing.status === 0;
   
+  // Handle listing deletion
+  const handleDeleteListing = async (listingId: string) => {
+    // Show confirmation dialog
+    if (window.confirm('هل أنت متأكد من حذف هذا العقار؟ لا يمكن التراجع عن هذا الإجراء.')) {
+      try {
+        const response = await fetch(`/api/listings/${listingId}`, {
+          method: 'DELETE',
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'فشل في حذف العقار');
+        }
+        
+        toast.success('تم حذف العقار بنجاح');
+        // Redirect to listings page
+        router.push('/user/dashboard');
+      } catch (err) {
+        console.error('Error deleting listing:', err);
+        toast.error(err instanceof Error ? err.message : 'حدث خطأ أثناء حذف العقار');
+      }
+    }
+  };
+  
   return (
     <div className="container mx-auto p-4 max-w-6xl" dir="rtl">
       {isOwner && (
@@ -99,11 +124,21 @@ export default function ListingDetail() {
                 </span>
               </div>
               
-              {canEdit && (
-                <Link href={`/listings/${listing.id}/edit`} className="btn btn-warning">
-                  تعديل
-                </Link>
-              )}
+              <div className="flex gap-2">
+                {canEdit && (
+                  <Link href={`/listings/${listing.id}/edit`} className="btn btn-warning">
+                    تعديل
+                  </Link>
+                )}
+                {isOwner && (
+                  <button 
+                    onClick={() => handleDeleteListing(listing.id)} 
+                    className="btn btn-error text-white"
+                  >
+                    حذف
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
