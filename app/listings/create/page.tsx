@@ -36,6 +36,19 @@ export default function CreateListingPage() {
           return;
         }
         
+        // Check if user is a moderator (permission level 2)
+        const { data: userProfile } = await supabase
+          .from('users')
+          .select('permissions')
+          .eq('id', session.user.id)
+          .single();
+          
+        if (userProfile?.permissions === 2) {
+          // If user is a moderator, redirect to the moderator dashboard
+          router.push('/mod/dashboard');
+          return;
+        }
+        
         // User is authenticated, create new listing
         const response = await fetch('/api/listings/create', {
           method: 'POST',
