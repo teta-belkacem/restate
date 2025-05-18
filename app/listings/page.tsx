@@ -2,13 +2,11 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 import Pagination from "@/components/ui/Pagination";
 import LocationSelector from "@/components/search/LocationSelector";
 import ListingCard from "@/components/listings/ListingCard";
 import { propertyTypes } from "@/utils/constants";
-import { Listing, State, Municipality } from "@/utils/types";
+import { Listing } from "@/utils/types";
 
 type PaginationData = {
   total: number;

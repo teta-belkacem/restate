@@ -7,18 +7,20 @@ import { createClient } from '@/utils/supabase/client';
 export default function CreateListingPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  // Using a ref to track submission across renders and effect re-runs
   const hasSubmitted = useRef(false);
 
   useEffect(() => {
-    // Flag to track if the effect cleanup has run
-    let isMounted = true;
+    // If we've already initiated a submission, don't do it again
+    if (hasSubmitted.current) {
+      return;
+    }
+
+    // Mark as submitted immediately to prevent duplicate submissions
+    // This is critical to set BEFORE the async operation
+    hasSubmitted.current = true;
     
-    async function checkAuthAndCreateListing() {
-      // If we've already submitted once, don't do it again
-      if (hasSubmitted.current) {
-        return;
-      }
-      
+    async function checkAuthAndCreateListing() {      
       try {
         setIsLoading(true);
         
@@ -33,9 +35,6 @@ export default function CreateListingPage() {
           router.push('/auth/login?redirect=/listings/create');
           return;
         }
-        
-        // Set flag to prevent duplicate submissions
-        hasSubmitted.current = true;
         
         // User is authenticated, create new listing
         const response = await fetch('/api/listings/create', {
@@ -58,21 +57,17 @@ export default function CreateListingPage() {
       } catch (error) {
         console.error('Error in listing creation:', error);
         // Show error (could be enhanced with a proper UI notification)
-        alert('خطأ في إنشاء القائمة. الرجاء المحاولة مرة أخرى.');
+        alert('خطأ في إنشاء العرض. الرجاء المحاولة مرة أخرى.');
+        // Reset submission flag if there was an error so user can try again
+        hasSubmitted.current = false;
       } finally {
         setIsLoading(false);
       }
     }
     
-    // Only run the function if it hasn't been submitted yet
-    if (!hasSubmitted.current) {
-      checkAuthAndCreateListing();
-    }
+    checkAuthAndCreateListing();
     
-    // Cleanup function to prevent memory leaks and side effects
-    return () => {
-      isMounted = false;
-    };
+    // No clean-up needed here as we're using the ref to track submission state
   }, [router]);
 
   return (

@@ -94,15 +94,6 @@ export const DELETE = protectRoute(async (request: NextRequest, userId: string) 
       );
     }
     
-    // Check if the listing is in a status that allows deletion
-    // Only drafts (0) and rejected listings (3) can be deleted
-    if (listing.status !== 0 && listing.status !== 3) {
-      return NextResponse.json(
-        { error: 'Only draft and rejected listings can be deleted' },
-        { status: 403 }
-      );
-    }
-    
     // Get images and video references to delete from storage
     const { data: listingData } = await supabase
       .from('listings')
@@ -140,19 +131,6 @@ export const DELETE = protectRoute(async (request: NextRequest, userId: string) 
         await supabase.storage.from('listings').remove([videoPath]);
       }
     }
-    
-    // Create a notification for the user
-    const notificationData = {
-      user_id: userId,
-      listing_id: null, // Listing is now deleted
-      message: `Your listing "${listing.title}" has been deleted.`,
-      is_read: false,
-      created_at: new Date().toISOString()
-    };
-    
-    await supabase
-      .from('notifications')
-      .insert([notificationData]);
     
     return NextResponse.json(
       { message: 'Listing deleted successfully' },

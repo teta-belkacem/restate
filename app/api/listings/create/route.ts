@@ -17,14 +17,10 @@ export const POST = protectRoute(async (req: NextRequest, userId: string) => {
     const supabase = await createClient();
     
     // Create a new empty listing with default status 0 (draft)
-    const currentDate = new Date().toISOString();
     const newListing: Partial<Listing> = {
       user_id: body.userId || userId, // Use provided userId or authenticated user
       // All other fields will use database defaults or be null
       status: 0, // Default status is draft
-      created_at: currentDate,
-      updated_at: currentDate,
-      communication_preferences: {} // Empty object for communication preferences
     };
     
     // Insert the new listing into the database
