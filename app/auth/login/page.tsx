@@ -20,7 +20,7 @@ export default function LoginPage() {
         const response = await fetch('/api/auth/me')
         if (response.ok) {
           // User is already logged in, redirect to homepage
-          router.push('/')
+          router.push('/listings')
         }
       } catch (error) {
         // Ignore errors - just means user is not authenticated
@@ -61,8 +61,8 @@ export default function LoginPage() {
       }
 
       // Redirect to home page on successful login
-      router.push('/');
-      router.refresh();
+      router.push('/listings');
+      window.location.reload();
     } catch (err: any) {
       setError(err.message)
       setLoading(false)

@@ -21,7 +21,7 @@ export default function RegisterPage() {
         const response = await fetch('/api/auth/me')
         if (response.ok) {
           // User is already logged in, redirect to homepage
-          router.push('/')
+          router.push('/listings')
         }
       } catch (error) {
         // Ignore errors - just means user is not authenticated
@@ -69,8 +69,8 @@ export default function RegisterPage() {
       }
 
       // Redirect to homepage on successful registration
-      router.push('/')
-      router.refresh()
+      router.push('/user/profile')
+      window.location.reload();
     } catch (err: any) {
       setError(err.message)
       setLoading(false)

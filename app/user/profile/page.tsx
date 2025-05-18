@@ -97,12 +97,12 @@ export default function ProfilePage() {
       const filePath = `${fileName}`;
       
       const { error: uploadError } = await supabase.storage
-        .from('profiles')
+        .from('avatars')
         .upload(filePath, file);
       
       if (uploadError) throw uploadError;
       
-      const { data } = supabase.storage.from('profiles').getPublicUrl(filePath);
+      const { data } = supabase.storage.from('avatars').getPublicUrl(filePath);
       setUser({ ...user, profile_picture: data.publicUrl });
       setSuccessMessage("تم رفع الصورة الشخصية بنجاح");
     } catch (error) {
