@@ -49,58 +49,16 @@ export default async function Home() {
         <div className="absolute inset-0 bg-primary/50"></div>
         <div className="hero-content text-center py-16 w-full max-w-7xl mx-auto px-4">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white [text-shadow:_0px_0px_8px_rgb(0_0_0_/_100%)]">إبحث عن منزل أحلامك</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white [text-shadow:_0px_0px_8px_rgb(0_0_0_/_100%)]">بوابتك للوصول إلى منزل أحلامك</h1>
             <p className="text-lg mb-8 text-gray-100 [text-shadow:_0px_0px_8px_rgb(0_0_0_/_100%)]">المنصة الموحدة لجميع العروض العقارية في الجزائر</p>
             
             {/* Search Box */}
-            <div className="bg-white p-6 rounded-2xl shadow-lg mb-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text">نوع العقار</span>
-                  </label>
-                  <select defaultValue="" className="select select-bordered w-full">
-                    <option value="" disabled>اختر نوع العقار</option>
-                    {propertyTypes.map(type => (
-                      <option key={type.id} value={type.id}>{type.name}</option>
-                    ))}
-                  </select>
-                </div>
-                
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text">الولاية</span>
-                  </label>
-                  <select defaultValue="" className="select select-bordered w-full">
-                    <option value="" disabled>اختر الولاية</option>
-                    {states.map(state => (
-                      <option key={state.id} value={state.id}>{state.name}</option>
-                    ))}
-                  </select>
-                </div>
-                
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text">نوع العملية</span>
-                  </label>
-                  <select defaultValue="" className="select select-bordered w-full">
-                    <option value="" disabled>اختر نوع العملية</option>
-                    {operationTypes.map(type => (
-                      <option key={type.id} value={type.id}>{type.name}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              
-              <div className="mt-6">
-                <Link href="/listings" className="btn btn-primary w-full md:w-auto px-8">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 ml-2">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                  البحث عن العقارات
-                </Link>
-              </div>
-            </div>
+            <Link href="/listings" className="btn btn-outline bg-white w-full md:w-auto px-8 md:text-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 ml-2">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              تصفح العروض الآن!
+            </Link>
             
           </div>
         </div>
