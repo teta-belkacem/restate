@@ -33,8 +33,11 @@ export default function ListingDetail() {
         const userId = session?.user?.id || null;
         setCurrentUser(userId);
         
+        // Safely extract id from params
+        const id = params?.id as string;
+        
         // Fetch listing data
-        const response = await fetch(`/api/listings/${params.id}`);
+        const response = await fetch(`/api/listings/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch listing');
         }
@@ -49,10 +52,12 @@ export default function ListingDetail() {
       }
     };
     
-    if (params.id) {
+    // Check if we have a valid ID parameter
+    const id = params?.id;
+    if (id) {
       fetchListingAndUser();
     }
-  }, [params.id]);
+  }, [params?.id]);
   
   if (loading) {
     return (

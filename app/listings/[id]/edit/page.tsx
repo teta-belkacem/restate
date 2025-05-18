@@ -1,17 +1,18 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { Listing } from "@/utils/types";
 import ContentCard from "@/components/common/ContentCard";
 import LocationSelector from "@/components/search/LocationSelector";
 import { propertyTypes, operationTypes, paymentTypes } from "@/utils/constants";
 
-export default function EditListingPage({ params }: { params: { id: string } }) {
+export default function EditListingPage() {
+  const params = useParams();
   const router = useRouter();
   const supabase = createClient();
-  const { id } = params;
+  const id = params?.id as string;
 
   // States
   const [listing, setListing] = useState<Partial<Listing>>({
