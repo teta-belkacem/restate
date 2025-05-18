@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +17,19 @@ type PaginationData = {
   totalPages: number;
 };
 
-export default function ListingsPage() {
+// Loading component to display while suspense is resolving
+function ListingsLoading() {
+  return (
+    <div className="container mx-auto p-4 my-8">
+      <div className="min-h-[400px] flex justify-center items-center">
+        <div className="loading loading-spinner loading-lg"></div>
+      </div>
+    </div>
+  );
+}
+
+// Client component that uses useSearchParams
+function ListingsContent() {
   // Router and search params
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -329,5 +341,14 @@ export default function ListingsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+// Main page component that wraps the client component with Suspense
+export default function ListingsPage() {
+  return (
+    <Suspense fallback={<ListingsLoading />}>
+      <ListingsContent />
+    </Suspense>
   );
 }
