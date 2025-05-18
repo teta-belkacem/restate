@@ -65,25 +65,25 @@ export interface Listing {
   /** Foreign key referencing `users.id` */
   user_id: string;
   /** Title of the listing */
-  title: string;
+  title: string | null;
   /** Type of property */
-  property_type: number;
+  property_type: number | null;
   /** Property address */
   address: string | null;
   /** Foreign key referencing `states.id` */
-  state_id: number;
+  state_id: number | null;
   /** Foreign key referencing `municipalities.id` */
-  municipality_id: number;
+  municipality_id: number | null;
   /** Array of image URLs (stored as JSONB) */
-  images: string[];
+  images: string[] | null;
   /** URL to a video of the property */
-  video: string;
+  video: string | null;
   /** Type of operation (0=selling or 1=renting) */
   operation_type: number | null;
   /** Seller's asking price, nullable */
   seller_price: number | null;
   /** Whether the price is negotiable */
-  is_negotiable: boolean;
+  is_negotiable: boolean | null;
   /** Highest bidding price, nullable */
   highest_bidding_price: number | null;
   /** Payment type, nullable */
@@ -91,9 +91,9 @@ export interface Listing {
   /** Description of the neighborhood, nullable */
   neighborhood_description: string | null;
   /** Type of documents provided */
-  documents_type: number | null;
+  documents_type: string | null;
   /** Number of views */
-  view_count: number;
+  view_count: number | null;
   /** Number of rooms, nullable */
   rooms: number | null;
   /** Number of stories, nullable */
@@ -105,13 +105,13 @@ export interface Listing {
   /** Additional notes, nullable */
   notes: string | null;
   /** Communication preferences as key-value pairs (stored as JSONB) */
-  communication_preferences: Record<string, string>;
+  communication_preferences: Record<string, string> | null;
   /** Status of the listing */
-  status: number;
+  status: number | null;
   /** Creation date (ISO string) */
-  created_at: string;
+  created_at: string | null;
   /** Last update date (ISO string) */
-  updated_at: string;
+  updated_at: string | null;
 }
 
 /**
