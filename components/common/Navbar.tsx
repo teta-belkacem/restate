@@ -82,7 +82,7 @@ export default function Navbar() {
               {isAuthenticated ? (
                 <>
                   {!isModerator && (
-                    <li><Link href="/user/dashboard">قائمة عروضي</Link></li>
+                    <li><Link href="/user/dashboard">إدارة عروضي</Link></li>
                   )}
                   <li><Link href="/user/profile">تعديل بيانات الملف الشخصي</Link></li>
                   <li><button onClick={handleSignOut}>تسجيل الخروج</button></li>
@@ -138,7 +138,7 @@ export default function Navbar() {
                   </div>
                   <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-right">
                     {!isModerator && (
-                      <li><Link href="/user/dashboard" className="text-sm p-1">قائمة عروضي</Link></li>
+                      <li><Link href="/user/dashboard" className="text-sm p-1">إدارة عروضي</Link></li>
                     )}
                     <li><Link href="/user/profile" className="text-sm p-1">تعديل بيانات الملف الشخصي</Link></li>
                     <li><button onClick={handleSignOut} className="text-sm p-1">تسجيل الخروج</button></li>

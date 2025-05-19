@@ -7,6 +7,7 @@ import { Listing } from "@/utils/types";
 import ContentCard from "@/components/common/ContentCard";
 import LocationSelector from "@/components/search/LocationSelector";
 import { propertyTypes, operationTypes, paymentTypes } from "@/utils/constants";
+import toast from "react-hot-toast";
 
 export default function EditListingPage() {
   const params = useParams();
@@ -189,17 +190,19 @@ export default function EditListingPage() {
       }
 
       if (submitForReview) {
-        setSuccessMessage("تم إرسال العقار للمراجعة بنجاح");
+        toast.success("تم إرسال العقار للمراجعة بنجاح");
         // Update listing state with new status
         setListing(dataToSubmit);
-        // Redirect to user listings after successful submission
-        setTimeout(() => router.push("/listings"), 1500);
+        router.push("/user/dashboard");
       } else {
-        setSuccessMessage("تم حفظ التغييرات بنجاح");
+        toast.success("تم حفظ التغييرات بنجاح");
       }
     } catch (error) {
       console.error("Error updating listing:", error);
       setErrorMessage(submitForReview 
+        ? "فشل في إرسال العقار للمراجعة" 
+        : "فشل في حفظ التغييرات");
+      toast.error(submitForReview 
         ? "فشل في إرسال العقار للمراجعة" 
         : "فشل في حفظ التغييرات");
     } finally {

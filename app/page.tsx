@@ -1,10 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { createClient } from '@/utils/supabase/server';
 import ListingCard from '@/components/listings/ListingCard';
 import { Listing, State, Municipality } from '@/utils/types';
-import { propertyTypes, operationTypes } from '@/utils/constants';
+import { propertyTypes } from '@/utils/constants';
 
 async function getLatestListings() {
   const supabase = await createClient();
@@ -98,7 +97,7 @@ export default async function Home() {
               </div>
               <div className="stat-title">صفقات ناجحة</div>
               <div className="stat-value">500+</div>
-              <div className="stat-desc">تمت بنجاح من خلال منصتنا</div>
+              <div className="stat-desc">تمت بنجاح من بسبب منصتنا</div>
             </div>
           </div>
         </div>

@@ -65,12 +65,12 @@ export default async function DashboardPage() {
   return (
     <div className="container mx-auto px-4 py-8 rtl">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">لوحة التحكم</h1>
+        <h1 className="text-3xl font-bold">إدارة عروضي</h1>
         <Link 
           href="/listings/create" 
           className="btn btn-primary"
         >
-          إضافة عقار جديد
+          إضافة عرض جديد
         </Link>
       </div>
       
@@ -138,7 +138,7 @@ export default async function DashboardPage() {
             href="/listings/create" 
             className="btn btn-primary btn-lg"
           >
-            إضافة عقار جديد
+            إضافة عرض جديد
           </Link>
         </div>
       )}

@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 import { User, UserType } from "@/utils/types";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -104,7 +105,6 @@ export default function ProfilePage() {
       
       const { data } = supabase.storage.from('avatars').getPublicUrl(filePath);
       setUser({ ...user, profile_picture: data.publicUrl });
-      setSuccessMessage("تم رفع الصورة الشخصية بنجاح");
     } catch (error) {
       console.error("Error uploading profile picture:", error);
       setErrorMessage("فشل في رفع الصورة الشخصية");
@@ -135,7 +135,8 @@ export default function ProfilePage() {
 
       if (error) throw error;
       
-      setSuccessMessage("تم تحديث المعلومات الشخصية بنجاح");
+      toast.success("تم تحديث المعلومات الشخصية بنجاح");
+      router.push('/user/dashboard');
     } catch (error) {
       console.error("Error updating user profile:", error);
       setErrorMessage("فشل في تحديث المعلومات الشخصية");

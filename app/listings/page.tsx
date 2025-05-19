@@ -168,7 +168,7 @@ function ListingsContent() {
   return (
     <div className="container mx-auto px-4 py-8" dir="rtl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">البحث عن عقارات</h1>
+        <h1 className="text-3xl font-bold mb-2">محرك البحث</h1>
         <p className="text-gray-600">استكشف العقارات المتاحة وابحث حسب متطلباتك</p>
       </div>
       

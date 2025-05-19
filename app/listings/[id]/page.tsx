@@ -20,6 +20,8 @@ export default function ListingDetail() {
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [listingToDelete, setListingToDelete] = useState<string | null>(null);
   
   // Get Supabase client
   const supabase = createClient();
@@ -82,32 +84,75 @@ export default function ListingDetail() {
   const isOwner = currentUser === listing.user_id;
   const canEdit = isOwner && listing.status === 0;
   
+  // Open delete confirmation modal
+  const openDeleteModal = (listingId: string) => {
+    setListingToDelete(listingId);
+    setIsDeleteModalOpen(true);
+  };
+
   // Handle listing deletion
   const handleDeleteListing = async (listingId: string) => {
-    // Show confirmation dialog
-    if (window.confirm('هل أنت متأكد من حذف هذا العقار؟ لا يمكن التراجع عن هذا الإجراء.')) {
-      try {
-        const response = await fetch(`/api/listings/${listingId}`, {
-          method: 'DELETE',
-        });
-        
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'فشل في حذف العقار');
-        }
-        
-        toast.success('تم حذف العقار بنجاح');
-        // Redirect to listings page
-        router.push('/user/dashboard');
-      } catch (err) {
-        console.error('Error deleting listing:', err);
-        toast.error(err instanceof Error ? err.message : 'حدث خطأ أثناء حذف العقار');
+    // Instead of window.confirm, we now use a modal dialog
+    openDeleteModal(listingId);
+  };
+  
+  // Perform the actual deletion after confirmation
+  const confirmDeleteListing = async () => {
+    if (!listingToDelete) return;
+    
+    try {
+      const response = await fetch(`/api/listings/${listingToDelete}`, {
+        method: 'DELETE',
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'فشل في حذف العقار');
       }
+      
+      toast.success('تم حذف العقار بنجاح');
+      // Close the modal
+      setIsDeleteModalOpen(false);
+      // Redirect to listings page
+      router.push('/user/dashboard');
+    } catch (err) {
+      console.error('Error deleting listing:', err);
+      toast.error(err instanceof Error ? err.message : 'حدث خطأ أثناء حذف العقار');
+      // Close the modal even on error
+      setIsDeleteModalOpen(false);
     }
   };
   
   return (
     <div className="container mx-auto p-4 max-w-6xl" dir="rtl">
+      {/* Delete Confirmation Modal */}
+      <input
+        type="checkbox"
+        id="delete-modal"
+        className="modal-toggle"
+        checked={isDeleteModalOpen}
+        onChange={() => setIsDeleteModalOpen(!isDeleteModalOpen)}
+      />
+      <div className={`modal ${isDeleteModalOpen ? 'modal-open' : ''}`}>
+        <div className="modal-box bg-white">
+          <h3 className="font-bold text-lg text-right">تأكيد الحذف</h3>
+          <p className="py-4 text-right">هل أنت متأكد من حذف هذا العقار؟ لا يمكن التراجع عن هذا الإجراء.</p>
+          <div className="modal-action">
+            <button
+              className="btn btn-error"
+              onClick={confirmDeleteListing}
+            >
+              نعم، قم بالحذف
+            </button>
+            <button
+              className="btn btn-ghost"
+              onClick={() => setIsDeleteModalOpen(false)}
+            >
+              إلغاء
+            </button>
+          </div>
+        </div>
+      </div>
       {isOwner && (
         <div className="mb-4">
           <div className="bg-amber-50 border-amber-200 border p-4 rounded-lg mb-4">

@@ -158,7 +158,7 @@ export default function ModDashboard() {
   
   return (
     <div className="container mx-auto py-8 px-4">
-      <h1 className="text-2xl font-bold mb-6">لوحة المراجعة</h1>
+      <h1 className="text-2xl text-center font-bold mb-6">لوحة الإشراف</h1>
       
       {/* Error message */}
       {error && (
