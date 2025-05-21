@@ -136,7 +136,7 @@ export default function Navbar() {
                       />
                     </div>
                   </div>
-                  <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-right">
+                  <ul id="profile-dropdown" tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-right">
                     {!isModerator && (
                       <li><Link href="/user/dashboard" className="text-sm p-1">إدارة عروضي</Link></li>
                     )}

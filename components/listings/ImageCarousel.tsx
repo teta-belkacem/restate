@@ -40,7 +40,7 @@ const ImageCarousel = ({ images, video }: { images: string[]; video?: string | n
 
   return (
     <div className="relative">
-      <div className="carousel w-full h-96 rounded-lg overflow-hidden shadow-xl mb-4">
+      <div className="carousel w-full h-96 md:h-150 rounded-lg overflow-hidden shadow-xl mb-4">
         {mediaItems.map((item, index) => (
           <div
             key={index}

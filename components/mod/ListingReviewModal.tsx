@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Listing } from '@/utils/types';
 import { propertyTypes, operationTypes, paymentTypes, listingStatus, reviewStatus, specifications } from '@/utils/constants';
+import ImageCarousel from '../listings/ImageCarousel';
 
 interface ListingReviewModalProps {
   isOpen: boolean;
@@ -128,58 +129,11 @@ export default function ListingReviewModal({
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Images Gallery */}
-          <div className="md:col-span-2 rounded-lg overflow-hidden">
-
-            {/* Video */}
-            {listing.video ? (
-              <div className="mt-4 p-2 border rounded-lg">
-                <h4 className="text-lg font-semibold mb-2">فيديو العقار</h4>
-                <video 
-                  src={listing.video} 
-                  controls 
-                  className="w-full rounded-lg" 
-                  style={{ maxHeight: '300px' }} 
-                />
-              </div>
-            ) : (
-              <div className='h-[200px] w-full flex items-center justify-center'>
-                <p className='text-center text-gray-500'>
-                  لا يوجد فيديو!
-                </p>
-              </div>
-            )}
-
-            {/* Images */}
-            <div className="carousel w-full rounded-lg shadow-md">
-              {listing.images && listing.images.length > 0 ? (
-                listing.images.map((image, index) => (
-                  <div key={index} id={`slide${index}`} className="carousel-item relative w-full">
-                    <div className="w-full h-96 relative">
-                      <Image 
-                        src={image} 
-                        alt={`صورة ${index + 1}`} 
-                        fill 
-                        className="object-cover rounded-lg" 
-                      />
-                    </div>
-                    {listing.images && listing.images.length > 1 && (
-                      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href={`#slide${index === listing.images.length - 1 ? 0 : index + 1}`} className="btn btn-circle btn-primary">
-                          ❮
-                        </a>
-                        <a href={`#slide${index === 0 ? listing.images.length - 1 : index - 1}`} className="btn btn-circle btn-primary">
-                          ❯
-                        </a> 
-                      </div>
-                    )}
-                  </div>
-                ))
-              ) : (
-                <div className="flex items-center justify-center w-full h-96 bg-gray-200 rounded-lg">
-                  <p className="text-lg text-gray-500">لا توجد صور متوفرة</p>
-                </div>
-              )}
-            </div>
+          <div className='md:col-span-2'>
+            <ImageCarousel 
+              images={listing.images || []} 
+              video={listing.video} 
+            />
           </div>
 
           {/* Listing Details */}

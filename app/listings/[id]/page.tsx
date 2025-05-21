@@ -22,9 +22,24 @@ export default function ListingDetail() {
   const [error, setError] = useState<string | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [listingToDelete, setListingToDelete] = useState<string | null>(null);
+  const [reason, setReason] = useState<string | null>(null);
   
   // Get Supabase client
   const supabase = createClient();
+
+  async function getReason(listingId: number) {
+    const {data, error} = await supabase
+      .from('listing_reviews')
+      .select('reason')
+      .eq('listing_id', listingId)
+      .single();
+
+    if (error) {
+      return "فشل في الحصول على سبب الرفض";
+    }
+
+    return data?.reason;
+  }
   
   useEffect(() => {
     const fetchListingAndUser = async () => {
@@ -47,6 +62,11 @@ export default function ListingDetail() {
         
         const { data } = await response.json();
         setListing(data);
+
+        //fetch refuse reason if there's any
+        const reason = await getReason(data.id);
+        setReason(reason);
+
       } catch (err) {
         console.error('Error fetching listing:', err);
         setError('حدث خطأ أثناء تحميل بيانات العقار');
@@ -185,6 +205,12 @@ export default function ListingDetail() {
                 )}
               </div>
             </div>
+            {listing.status === 3 && 
+              <div>
+                <span className="font-bold ml-2">سبب الرفض: </span>
+                <span className="whitespace-pre-wrap"> {reason} </span>
+              </div>
+            }
           </div>
         </div>
       )}
@@ -293,7 +319,7 @@ export default function ListingDetail() {
       {/* Notes section */}
       {listing.notes && (
         <ContentCard className="mt-6" title="ملاحظات">
-          <p>{listing.notes}</p>
+          <p className="whitespace-pre-wrap">{listing.notes}</p>
         </ContentCard>
       )}
       
@@ -314,7 +340,7 @@ export default function ListingDetail() {
             </li>
             <li className='flex flex-col'>
               <span className="text-gray-600">وصف الحي:</span>
-              <span className="font-semibold ms-4">{listing.neighborhood_description}</span>
+              <span className="font-semibold ms-4 whitespace-pre-wrap">{listing.neighborhood_description}</span>
             </li>
           </ul>
         </ContentCard>
