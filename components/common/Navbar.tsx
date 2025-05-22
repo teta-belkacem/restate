@@ -14,6 +14,7 @@ export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [supabaseUser, setSupabaseUser] = useState<any | null>(null);
   const [profileUrl, setProfileUrl] = useState('/images/default-avatar.png');
+  const [refresh, setRefresh] = useState(0);
   const router = useRouter();
   const supabase = createClient();
 
@@ -59,8 +60,12 @@ export default function Navbar() {
     router.push('/');
   };
 
+  const handleRefresh = () => {
+    setRefresh(prev => prev + 1);
+  }
+
   return (
-    <header className="bg-black shadow-sm">
+    <header className="bg-black shadow-sm" key={refresh}>
       <div className="container navbar py-2">
         {/* Right side of navbar (in RTL this appears on the right side) */}
         <div className="navbar-start">
@@ -71,26 +76,26 @@ export default function Navbar() {
               </svg>
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[2] p-2 shadow bg-base-100 rounded-box w-52 text-right">
-              <li><Link href="/listings">البحث</Link></li>
+              <li><Link onClick={handleRefresh} href="/listings">البحث</Link></li>
               {isAuthenticated && !isModerator && (
-                <li><Link href="/listings/create">إضافة عرض جديد</Link></li>
+                <li><Link onClick={handleRefresh} href="/listings/create">إضافة عرض جديد</Link></li>
               )}
               {isModerator && (
-                <li><Link href="/mod/dashboard">لوحة الإشراف</Link></li>
+                <li><Link onClick={handleRefresh} href="/mod/dashboard">لوحة الإشراف</Link></li>
               )}
               <div className="divider my-1"></div>
               {isAuthenticated ? (
                 <>
                   {!isModerator && (
-                    <li><Link href="/user/dashboard">إدارة عروضي</Link></li>
+                    <li><Link onClick={handleRefresh} href="/user/dashboard">إدارة عروضي</Link></li>
                   )}
-                  <li><Link href="/user/profile">تعديل بيانات الملف الشخصي</Link></li>
+                  <li><Link onClick={handleRefresh} href="/user/profile">تعديل بيانات الملف الشخصي</Link></li>
                   <li><button onClick={handleSignOut}>تسجيل الخروج</button></li>
                 </>
               ) : (
                 <>
-                  <li><Link href="/auth/register">إنشاء حساب</Link></li>
-                  <li><Link href="/auth/login">تسجيل الدخول</Link></li>
+                  <li><Link onClick={handleRefresh} href="/auth/register">إنشاء حساب</Link></li>
+                  <li><Link onClick={handleRefresh} href="/auth/login">تسجيل الدخول</Link></li>
                 </>
               )}
             </ul>
@@ -138,9 +143,9 @@ export default function Navbar() {
                   </div>
                   <ul id="profile-dropdown" tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-right">
                     {!isModerator && (
-                      <li><Link href="/user/dashboard" className="text-sm p-1">إدارة عروضي</Link></li>
+                      <li><Link onClick={handleRefresh} href="/user/dashboard" className="text-sm p-1">إدارة عروضي</Link></li>
                     )}
-                    <li><Link href="/user/profile" className="text-sm p-1">تعديل بيانات الملف الشخصي</Link></li>
+                    <li><Link onClick={handleRefresh} href="/user/profile" className="text-sm p-1">تعديل بيانات الملف الشخصي</Link></li>
                     <li><button onClick={handleSignOut} className="text-sm p-1">تسجيل الخروج</button></li>
                   </ul>
                 </div>
