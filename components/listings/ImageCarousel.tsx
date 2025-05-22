@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * ImageCarousel component for property images and video with modal slideshow
@@ -49,6 +49,7 @@ const ImageCarousel = ({ images, video }: { images: string[]; video?: string | n
           >
             {item.includes('.mp4') ? (
               <video 
+                id="vid"
                 className="w-full h-full object-cover" 
                 controls
                 src={item.startsWith('http') ? item : `https://placehold.co/600x400?text=فيديو+غير+متاح`}
@@ -136,7 +137,6 @@ const ImageCarousel = ({ images, video }: { images: string[]; video?: string | n
                   <video 
                     className="w-full max-h-[80vh] object-contain" 
                     controls
-                    autoPlay
                     src={item.startsWith('http') ? item : `https://placehold.co/1200x800?text=فيديو+غير+متاح`}
                   />
                 ) : (

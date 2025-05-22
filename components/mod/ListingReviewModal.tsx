@@ -212,7 +212,7 @@ export default function ListingReviewModal({
             {listing.neighborhood_description && (
               <div className="mt-4">
                 <h5 className="font-semibold mb-2">وصف الحي:</h5>
-                <p className="text-gray-700">{listing.neighborhood_description}</p>
+                <p className="text-gray-700 whitespace-pre-wrap">{listing.neighborhood_description}</p>
               </div>
             )}
 
@@ -220,7 +220,7 @@ export default function ListingReviewModal({
             {listing.notes && (
               <div className="mt-4">
                 <h5 className="font-semibold mb-2">ملاحظات:</h5>
-                <p className="text-gray-700">{listing.notes}</p>
+                <p className="text-gray-700 whitespace-pre-wrap">{listing.notes}</p>
               </div>
             )}
           </div>
