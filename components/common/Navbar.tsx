@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import NotificationDropdown from './NotificationDropdown';
 import { createClient } from '@/utils/supabase/client';
 import type { User } from '@/utils/types';
+import createListingPage from '@/utils/listings/create-listing';
 
 export default function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -64,6 +65,12 @@ export default function Navbar() {
     setRefresh(prev => prev + 1);
   }
 
+  const handleCreateListing = async () => {
+    const url = await createListingPage();
+    router.push(url);
+    handleRefresh();
+  }
+
   return (
     <header className="bg-black shadow-sm" key={refresh}>
       <div className="container navbar py-2">
@@ -78,7 +85,7 @@ export default function Navbar() {
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[2] p-2 shadow bg-base-100 rounded-box w-52 text-right">
               <li><Link onClick={handleRefresh} href="/listings">البحث</Link></li>
               {isAuthenticated && !isModerator && (
-                <li><Link onClick={handleRefresh} href="/listings/create">إضافة عرض جديد</Link></li>
+                <li><Link onClick={handleCreateListing} href="">إضافة عرض جديد</Link></li>
               )}
               {isModerator && (
                 <li><Link onClick={handleRefresh} href="/mod/dashboard">لوحة الإشراف</Link></li>
@@ -114,7 +121,7 @@ export default function Navbar() {
             <ul className="menu menu-horizontal px-1">
               <li><Link href="/listings" className="text-base text-white hover:underline">البحث</Link></li>
               {isAuthenticated && !isModerator && (
-                <li><Link href="/listings/create" className="text-base text-white hover:underline">إضافة عرض جديد</Link></li>
+                <li><Link onClick={handleCreateListing} href="" className="text-base text-white hover:underline">إضافة عرض جديد</Link></li>
               )}
               {isModerator && (
                 <li><Link href="/mod/dashboard" className="text-base text-white hover:underline">لوحة الإشراف</Link></li>

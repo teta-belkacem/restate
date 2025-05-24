@@ -4,6 +4,7 @@ import { listingStatus } from '@/utils/constants';
 import { redirect } from 'next/navigation';
 import ListingCard from '@/components/listings/ListingCard';
 import Link from 'next/link';
+import CreateListingButton from '@/components/listings/CreateListingButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -66,12 +67,7 @@ export default async function DashboardPage() {
     <div className="container mx-auto px-4 py-8 rtl">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">إدارة عروضي</h1>
-        <Link 
-          href="/listings/create" 
-          className="btn btn-primary"
-        >
-          إضافة عرض جديد
-        </Link>
+        <CreateListingButton />
       </div>
       
       {/* Status summary */}
@@ -134,12 +130,7 @@ export default async function DashboardPage() {
             <h3 className="text-xl font-semibold mb-2">لم تقم بإضافة أي عقارات بعد</h3>
             <p className="text-gray-500">قم بإضافة عقارك الأول للبدء</p>
           </div>
-          <Link 
-            href="/listings/create" 
-            className="btn btn-primary btn-lg"
-          >
-            إضافة عرض جديد
-          </Link>
+          <CreateListingButton />
         </div>
       )}
     </div>

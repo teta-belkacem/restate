@@ -4,6 +4,7 @@ import { createClient } from '@/utils/supabase/server';
 import ListingCard from '@/components/listings/ListingCard';
 import { Listing, State, Municipality } from '@/utils/types';
 import { propertyTypes } from '@/utils/constants';
+import CreateListingButton from '@/components/listings/CreateListingButton';
 
 async function getLatestListings() {
   const supabase = await createClient();
@@ -180,9 +181,7 @@ export default async function Home() {
           <h2 className="text-3xl font-bold mb-6">هل تريد بيع أو تأجير عقارك؟</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto">انضم إلينا اليوم وقم بنشر إعلان عقارك بكل سهولة. منصتنا تساعدك على الوصول إلى آلاف المشترين المحتملين.</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href='/listings/create' className="btn bg-white text-primary hover:bg-gray-100">
-              إضافة عقار جديد
-            </Link>
+            <CreateListingButton className="btn bg-white text-primary hover:bg-gray-100" />
           </div>
         </div>
       </section>

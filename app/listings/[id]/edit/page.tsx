@@ -783,14 +783,6 @@ export default function EditListingPage() {
           {/* Action Buttons */}
           <div className="flex flex-col md:flex-row gap-4 justify-end">
             <button
-              type="button"
-              onClick={() => router.back()}
-              className="btn btn-outline"
-              disabled={isSaving}
-            >
-              إلغاء
-            </button>
-            <button
               type="submit"
               className="btn btn-outline"
               disabled={isSaving}
