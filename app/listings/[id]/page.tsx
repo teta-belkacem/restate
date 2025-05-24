@@ -142,6 +142,44 @@ export default function ListingDetail() {
       setIsDeleteModalOpen(false);
     }
   };
+
+  const handleSubmitListing = async (id: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("listings")
+        .select("*")
+        .eq("id", id)
+        .single();
+      
+      if (error) {
+        throw error;
+      }
+      
+      // set status to 1 (pending review)
+      const dataToSubmit = { ...data, status: 1 };
+      
+      const response = await fetch(`/api/listings/${id}/update`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSubmit),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to update listing");
+      }
+
+      toast.success("تم إرسال العرض للمراجعة بنجاح");
+      router.push("/user/dashboard");
+
+    } catch (error) {
+      console.error("Error updating listing:", error);
+      toast.error("فشل في إرسال العرض للمراجعة");
+    } 
+  }
   
   return (
     <div className="container mx-auto p-4 max-w-6xl" dir="rtl">
@@ -190,17 +228,25 @@ export default function ListingDetail() {
               </div>
               
               <div className="flex gap-2">
+                {isOwner && (
+                  <button 
+                    onClick={() => handleDeleteListing(listing.id)} 
+                    className="btn btn-error"
+                  >
+                    حذف
+                  </button>
+                )}
                 {canEdit && (
                   <Link href={`/listings/${listing.id}/edit`} className="btn btn-warning">
                     تعديل
                   </Link>
                 )}
-                {isOwner && (
+                {canEdit && (
                   <button 
-                    onClick={() => handleDeleteListing(listing.id)} 
-                    className="btn btn-error text-white"
+                    onClick={() => handleSubmitListing(listing.id)} 
+                    className="btn btn-success"
                   >
-                    حذف
+                    إرسال للمراجعة
                   </button>
                 )}
               </div>

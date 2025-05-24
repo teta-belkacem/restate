@@ -163,14 +163,14 @@ export default function NotificationDropdown() {
           ) : notifications.length === 0 ? (
             <div className="text-center p-4">لا توجد إشعارات</div>
           ) : (
-            <ul className="menu bg-base-100 w-full rounded-box p-0 max-h-[50vh] overflow-y-auto">
+            <ul className="menu bg-base-100 w-full rounded-box p-0 max-h-[50vh] overflow-hidden">
               {notifications.map((notification) => (
                 <li key={notification.id}>
                   <button 
                     onClick={() => openNotificationDetails(notification)}
                     className={`flex flex-col items-start text-right py-3 ${!notification.is_read ? '' : 'opacity-75'}`}
                   >
-                    <span className="text-sm truncate w-full flex items-start gap-2">
+                    <span className="text-sm truncate flex items-start gap-2">
                       {notification.message}
                     </span>
                     <small className="text-xs opacity-70">
@@ -190,7 +190,7 @@ export default function NotificationDropdown() {
           <div className="modal-box" dir="rtl">
             <h3 className="font-bold text-lg text-right">إشعار</h3>
             <div className="py-4 text-right">
-              <p>{selectedNotification.message}</p>
+              <p className="whitespace-pre-wrap">{selectedNotification.message}</p>
               <div className="mt-2 text-sm opacity-70 text-right">
                 {formatDate(selectedNotification.created_at)}
               </div>

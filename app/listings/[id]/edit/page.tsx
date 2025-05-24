@@ -193,9 +193,8 @@ export default function EditListingPage() {
         toast.success("تم إرسال العقار للمراجعة بنجاح");
         // Update listing state with new status
         setListing(dataToSubmit);
-        router.push("/user/dashboard");
       } else {
-        toast.success("تم حفظ التغييرات بنجاح");
+        toast.success("تم حفظ التغييرات")
       }
     } catch (error) {
       console.error("Error updating listing:", error);
@@ -207,6 +206,7 @@ export default function EditListingPage() {
         : "فشل في حفظ التغييرات");
     } finally {
       setIsSaving(false);
+      router.push("/user/dashboard");
     }
   };
 
@@ -792,15 +792,15 @@ export default function EditListingPage() {
             </button>
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-outline"
               disabled={isSaving}
             >
-              {isSaving ? <span className="loading loading-spinner loading-sm"></span> : "حفظ التغييرات"}
+              {isSaving ? <span className="loading loading-spinner loading-sm"></span> : "حفظ كمسودة"}
             </button>
             <button
               type="submit"
               onClick={handleSubmitForReview}
-              className="btn btn-accent"
+              className="btn btn-primary"
               disabled={isSaving}
             >
               {isSaving ? <span className="loading loading-spinner loading-sm"></span> : "إرسال للمراجعة"}
