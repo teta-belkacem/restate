@@ -47,10 +47,10 @@ const ImageCarousel = ({ images, video }: { images: string[]; video?: string | n
             id={`slide-${index}`}
             className={`carousel-item relative w-full ${activeSlide === index ? 'block' : 'hidden'}`}
           >
-            {item.includes('.mp4') ? (
+            {(item.includes('.mp4') || item.includes('.MP4') || item.includes('.webm') || item.includes('.WEBM') ) ? (
               <video 
                 id="vid"
-                className="w-full h-full object-cover" 
+                className="w-full h-full object-contain" 
                 controls
                 src={item.startsWith('http') ? item : `https://placehold.co/600x400?text=فيديو+غير+متاح`}
               />
@@ -58,7 +58,7 @@ const ImageCarousel = ({ images, video }: { images: string[]; video?: string | n
               <div className="relative cursor-pointer" onClick={() => openModal(index)}>
                 <img
                   src={item.startsWith('http') ? item : `https://placehold.co/600x400?text=صورة+غير+متاحة`}
-                  className="w-full h-full object-cover"
+                  className="w-full max-h-[80vh] object-cover"
                   alt={`صورة العقار ${index + 1}`}
                 />
                 <div className="absolute inset-0 bg-black opacity-0 hover:opacity-10 transition-opacity flex items-center justify-center">
@@ -100,7 +100,7 @@ const ImageCarousel = ({ images, video }: { images: string[]; video?: string | n
             onClick={() => setActiveSlide(index)}
             className={`w-16 h-16 rounded-md overflow-hidden border-2 ${activeSlide === index ? 'border-primary' : 'border-transparent'}`}
           >
-            {item.includes('.mp4') ? (
+            {(item.includes('.mp4') || item.includes('.MP4') || item.includes('.webm') || item.includes('.WEBM')) ? (
               <div className="bg-gray-200 w-full h-full flex items-center justify-center">
                 <span className="text-xs">فيديو</span>
               </div>
@@ -133,7 +133,7 @@ const ImageCarousel = ({ images, video }: { images: string[]; video?: string | n
                 key={`modal-slide-${index}`} 
                 className={`w-full ${modalSlide === index ? 'block' : 'hidden'}`}
               >
-                {item.includes('.mp4') ? (
+                {(item.includes('.mp4') || item.includes('.MP4') || item.includes('.webm') || item.includes('.WEBM')) ? (
                   <video 
                     className="w-full max-h-[80vh] object-contain" 
                     controls
@@ -180,7 +180,7 @@ const ImageCarousel = ({ images, video }: { images: string[]; video?: string | n
                     onClick={() => setModalSlide(index)}
                     className={`w-16 h-16 rounded-md overflow-hidden border-2 ${modalSlide === index ? 'border-primary' : 'border-gray-700'}`}
                   >
-                    {item.includes('.mp4') ? (
+                    {(item.includes('.mp4') || item.includes('.MP4') || item.includes('.webm') || item.includes('.WEBM')) ? (
                       <div className="bg-gray-800 w-full h-full flex items-center justify-center">
                         <span className="text-xs text-white">فيديو</span>
                       </div>
